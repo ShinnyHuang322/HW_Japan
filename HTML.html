@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第一次日本自由行新手包｜互動教學簡報</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-[#FAF8F5] text-stone-800 min-h-screen flex flex-col justify-between antialiased selection:bg-teal-100 selection:text-teal-900">
+
+  <!-- 頂部進度條與課程標頭 -->
+  <header class="w-full bg-white/80 backdrop-blur-md border-b border-stone-200/80 sticky top-0 z-30">
+    <div class="w-full h-1.5 bg-stone-200">
+      <div id="top-progress-bar" class="h-full bg-teal-600 transition-all duration-300 ease-out" style="width: 14.28%;"></div>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-8 py-3.5 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-teal-600 text-white text-xs font-bold shadow-sm">JP</span>
+        <span class="text-sm sm:text-base font-bold text-stone-700 tracking-wide">第一次日本自由行新手包</span>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button id="toggle-notes-btn" type="button" class="text-xs font-medium px-3 py-1.5 rounded-full border border-stone-300 text-stone-600 hover:bg-stone-100 hover:text-stone-900 transition flex items-center gap-1.5">
+          <span>講者備忘錄</span>
+        </button>
+        <span id="page-counter-badge" class="text-xs font-bold px-3 py-1 rounded-full bg-teal-50 text-teal-800 border border-teal-200">
+          1 / 7
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 中央投影片舞台區 -->
+  <main class="flex-grow flex flex-col items-center justify-center px-4 sm:px-8 py-6 sm:py-10">
+    <div id="slide-card" class="w-full max-w-4xl bg-white rounded-3xl shadow-lg border border-stone-200/70 p-6 sm:p-12 transition-all duration-300">
+      
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+        <span id="slide-stage-tag" class="inline-block text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full bg-stone-100 text-stone-600 border border-stone-200">
+          課程總覽｜OVERVIEW
+        </span>
+        <span id="slide-badge-num" class="text-xs font-bold text-teal-600 bg-teal-50 px-2.5 py-1 rounded-md">
+          SLIDE 01
+        </span>
+      </div>
+
+      <h1 id="slide-title" class="text-2xl sm:text-4xl font-black text-stone-900 tracking-tight leading-tight">
+        第一次日本自由行新手包
+      </h1>
+      <p id="slide-subtitle" class="text-base sm:text-xl font-medium text-teal-700 mt-2">
+        從零開始的無痛出發全攻略
+      </p>
+
+      <div class="my-6 border-t border-stone-100"></div>
+
+      <!-- 條列清單容器 -->
+      <div id="slide-points" class="space-y-3.5"></div>
+
+      <div class="mt-7 pt-4 border-t border-stone-100 flex items-center gap-2 text-xs sm:text-sm text-stone-500">
+        <span class="inline-block w-2 h-2 rounded-full bg-amber-400 flex-shrink-0"></span>
+        <span id="slide-visual-hint">三大階段藍圖：行前準備 ➔ 交通支付 ➔ 住宿工具</span>
+      </div>
+
+    </div>
+
+    <!-- 可收合的講者備忘錄面板 -->
+    <div id="speaker-notes-box" class="hidden w-full max-w-4xl mt-4 bg-amber-50/90 border border-amber-200/80 rounded-2xl px-5 py-4 text-sm text-stone-700 shadow-sm">
+      <div class="font-bold text-amber-900 text-xs uppercase tracking-wider mb-1">
+        講者口白備忘錄 (Speaker Notes)
+      </div>
+      <p id="speaker-notes-text" class="leading-relaxed"></p>
+    </div>
+  </main>
+
+  <!-- 底部互動導覽控制列 -->
+  <footer class="w-full bg-white/90 backdrop-blur-md border-t border-stone-200/80 py-4 px-4 sm:px-8">
+    <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
+
+      <button id="prev-btn" type="button" class="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-sm font-bold border border-stone-300 text-stone-700 bg-white hover:bg-stone-100 disabled:opacity-40 disabled:pointer-events-none transition shadow-sm">
+        <span>‹ 上一頁</span>
+      </button>
+
+      <div class="flex flex-col items-center gap-1.5">
+        <div id="pagination-dots" class="flex items-center gap-2"></div>
+        <span class="hidden sm:inline text-[11px] text-stone-400">可使用鍵盤 ← / → 方向鍵切換投影片</span>
+      </div>
+
+      <button id="next-btn" type="button" class="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-sm font-bold text-white bg-teal-600 hover:bg-teal-700 disabled:opacity-40 disabled:pointer-events-none transition shadow-sm">
+        <span id="next-btn-text">下一頁 ›</span>
+      </button>
+
+    </div>
+  </footer>
+
+  <script>
+    var slidesData = [
+      {
+        stageTag: "課程總覽｜OVERVIEW",
+        title: "第一次日本自由行新手包",
+        subtitle: "從零開始的無痛出發全攻略",
+        visualHint: "三大階段藍圖：行前準備 ➔ 交通支付 ➔ 住宿工具",
+        points: [
+          { type: "normal", text: "行前數位入境準備，下飛機秒速通關" },
+          { type: "normal", text: "交通卡與跨境支付，免帶大把日幣現金" },
+          { type: "normal", text: "住宿選點與必備神級 App，語言不通也能玩" }
+        ],
+        notes: "歡迎來到日本自由行新手課！今天我們不講複雜的交通套票，只用 7 頁投影片帶你掌握從台灣出發到日本落地的最核心生存法則。"
+      },
+      {
+        stageTag: "第一站｜行前準備",
+        title: "行前準備：手機搞定入境卡",
+        subtitle: "Visit Japan Web 線上填寫與截圖術",
+        visualHint: "關鍵動作：居家完成登錄 ➔ 產生二合一 QR Code ➔ 存進相簿",
+        points: [
+          { type: "normal", text: "起飛前 6 小時上網填寫 VJW，免寫紙本單" },
+          { type: "normal", text: "產生二合一 QR Code，務必截圖防斷網" },
+          { type: "pitfall", text: "避坑：無官方 App，認明 .go.jp 免費官網" }
+        ],
+        notes: "Visit Japan Web 就是數位版的入境卡與海關申報單。最晚降落前 6 小時要填完，且強烈建議在家有網路時先截圖存相簿，避免機場排隊時連不上網。"
+      },
+      {
+        stageTag: "第二站｜交通解密",
+        title: "交通解密：一卡暢行日本電車",
+        subtitle: "手機版西瓜卡與「出站再轉乘」邏輯",
+        visualHint: "把 Suica 西瓜卡想像成日本版悠遊卡，感應就能搭",
+        points: [
+          { type: "normal", text: "iPhone 錢包直接綁定西瓜卡，線上秒儲值" },
+          { type: "normal", text: "Android 受晶片限制，落地機場買實體卡" },
+          { type: "pitfall", text: "避坑：JR 轉地鐵屬不同公司，須先出站再進站" }
+        ],
+        notes: "把西瓜卡想像成日本的悠遊卡即可。iPhone 用戶不用排隊買卡，在錢包 App 就能直接開卡儲值；另外日本鐵路分屬不同公司，轉乘時看到閘門別猶豫，先刷出站再重新進站就對了！"
+      },
+      {
+        stageTag: "第三站｜支付攻略",
+        title: "支付攻略：免帶大把現金的秘密",
+        subtitle: "台灣行動支付、信用卡與零錢消化術",
+        visualHint: "黃金組合：跨境掃碼付 + 高回饋信用卡 + 適量日圓現鈔",
+        points: [
+          { type: "normal", text: "全支付、街口掃 PayPay，免 1.5% 手續費" },
+          { type: "normal", text: "刷 3% 以上海外卡，每日備 5 千日圓現鈔" },
+          { type: "pitfall", text: "避坑：神社與拉麵機收現金，超商機台可清零錢" }
+        ],
+        notes: "日本現在非常流行掃碼支付，直接用台灣的街口或全支付掃日本 PayPay 碼，不僅免海外手續費還能賺回饋！現金只要每天抓 5 千到 8 千日圓應付神社或老店即可，零錢太多就去超商自助機台一次倒光。"
+      },
+      {
+        stageTag: "第四站｜住宿心法",
+        title: "住宿心法：拖行李不崩潰的選房術",
+        subtitle: "鎖定環狀線樞紐與「電梯出口」",
+        visualHint: "東京首選 JR 山手線大站（上野、新宿、池袋）",
+        points: [
+          { type: "normal", text: "首選 JR 山手線沿線大站，環狀線免頻繁轉乘" },
+          { type: "normal", text: "實測車站至飯店步行 5 分鐘內，保留逛街體力" },
+          { type: "pitfall", text: "避坑：別迷信最近出口，行前務必查電梯出口" }
+        ],
+        notes: "自由行每天走兩萬步是常態，選飯店首選「JR 山手線」沿線，就像台北捷運環狀線一樣坐過頭也能繞回來。訂好房後，務必先上地圖找標有「エレベーター（電梯）」的出口編號，才不會扛行李爬樓梯爬到懷疑人生。"
+      },
+      {
+        stageTag: "第五站｜數位神隊友",
+        title: "數位神隊友：語言不通也能玩透透",
+        subtitle: "導航、拍菜單翻譯與在地美食雷達",
+        visualHint: "手機必備三寶：乘換案內 ＋ Google 翻譯 ＋ Tabelog",
+        points: [
+          { type: "normal", text: "乘換案內：精準查詢月台與電梯最近車廂" },
+          { type: "normal", text: "Google 翻譯：預載日文離線包，拍菜單秒懂" },
+          { type: "pitfall", text: "避坑：Tabelog 評分嚴格，3.5 分即名店" }
+        ],
+        notes: "這三個 App 裝好就無敵了！進車站看「乘換案內」告訴你搭第幾節車廂離電梯最近；吃飯用 Google 翻譯相機對準日文菜單直接變中文；找餐廳看日本人的 Tabelog，看到 3.5 分以上直接排隊就對了，千萬別用台灣 4.5 星標準看它！"
+      },
+      {
+        stageTag: "最終檢核｜出發倒數",
+        title: "出發前 24 小時終極檢核表",
+        subtitle: "5 件事確認完畢，安心登機！",
+        visualHint: "行前最後 3 分鐘 Checklist，確認無誤就能快樂起飛",
+        points: [
+          { type: "check", text: "VJW 入境碼已截圖，支付 App 已更新" },
+          { type: "check", text: "手機綁好交通卡，並下載日文離線翻譯包" },
+          { type: "cta", text: "行動呼籲：存好飯店電梯出口，安心出發吧！" }
+        ],
+        notes: "出發前一晚，請花 3 分鐘對照這張清單打勾確認。只要入境碼有截圖、支付與離線翻譯包都準備好，並記下飯店電梯出口，你已經超越 90% 的新手了，祝大家有一趟完美的日本自由行！"
+      }
+    ];
+
+    var currentIndex = 0;
+
+    function renderSlide(index) {
+      var slide = slidesData[index];
+      var total = slidesData.length;
+
+      document.getElementById("page-counter-badge").textContent = (index + 1) + " / " + total;
+      document.getElementById("top-progress-bar").style.width = (((index + 1) / total) * 100) + "%";
+
+      var prevBtn = document.getElementById("prev-btn");
+      var nextBtn = document.getElementById("next-btn");
+      prevBtn.disabled = (index === 0);
+      nextBtn.disabled = (index === total - 1);
+      document.getElementById("next-btn-text").textContent = (index === total - 1) ? "已完成" : "下一頁 ›";
+
+      document.getElementById("slide-stage-tag").textContent = slide.stageTag;
+      document.getElementById("slide-badge-num").textContent = "SLIDE 0" + (index + 1);
+      document.getElementById("slide-title").textContent = slide.title;
+      document.getElementById("slide-subtitle").textContent = slide.subtitle;
+      document.getElementById("slide-visual-hint").textContent = slide.visualHint;
+      document.getElementById("speaker-notes-text").textContent = slide.notes;
+
+      var pointsContainer = document.getElementById("slide-points");
+      pointsContainer.innerHTML = "";
+
+      for (var i = 0; i < slide.points.length; i++) {
+        var item = slide.points[i];
+        var row = document.createElement("div");
+        var badge = document.createElement("span");
+        var text = document.createElement("p");
+
+        text.textContent = item.text;
+
+        if (item.type === "pitfall") {
+          row.className = "flex items-start gap-3.5 p-4 rounded-2xl bg-rose-50/80 border border-rose-200/80 text-rose-950";
+          badge.className = "flex-shrink-0 w-7 h-7 rounded-full bg-rose-500 text-white font-bold text-xs flex items-center justify-center mt-0.5 shadow-sm";
+          badge.textContent = "!";
+          text.className = "text-base sm:text-lg font-bold leading-snug";
+        } else if (item.type === "cta") {
+          row.className = "flex items-start gap-3.5 p-4 rounded-2xl bg-teal-600 text-white shadow-md";
+          badge.className = "flex-shrink-0 w-7 h-7 rounded-full bg-white text-teal-700 font-black text-xs flex items-center justify-center mt-0.5";
+          badge.textContent = "★";
+          text.className = "text-base sm:text-lg font-bold leading-snug";
+        } else if (item.type === "check") {
+          row.className = "flex items-start gap-3.5 p-4 rounded-2xl bg-stone-50 border border-stone-200/80 text-stone-800";
+          badge.className = "flex-shrink-0 w-7 h-7 rounded-lg bg-teal-100 text-teal-700 font-bold text-sm flex items-center justify-center mt-0.5";
+          badge.textContent = "✓";
+          text.className = "text-base sm:text-lg font-medium leading-snug";
+        } else {
+          row.className = "flex items-start gap-3.5 p-4 rounded-2xl bg-stone-50 border border-stone-200/80 text-stone-800";
+          badge.className = "flex-shrink-0 w-7 h-7 rounded-full bg-teal-600 text-white font-bold text-xs flex items-center justify-center mt-0.5 shadow-sm";
+          badge.textContent = String(i + 1);
+          text.className = "text-base sm:text-lg font-medium leading-snug";
+        }
+
+        row.appendChild(badge);
+        row.appendChild(text);
+        pointsContainer.appendChild(row);
+      }
+
+      var dotsContainer = document.getElementById("pagination-dots");
+      dotsContainer.innerHTML = "";
+      for (var j = 0; j < total; j++) {
+        (function(pageIdx) {
+          var dot = document.createElement("button");
+          dot.type = "button";
+          dot.setAttribute("aria-label", "跳至第 " + (pageIdx + 1) + " 頁");
+          dot.className = "h-2.5 rounded-full transition-all duration-300 " + (pageIdx === index ? "w-7 bg-teal-600" : "w-2.5 bg-stone-300 hover:bg-stone-400");
+          dot.onclick = function() {
+            currentIndex = pageIdx;
+            renderSlide(currentIndex);
+          };
+          dotsContainer.appendChild(dot);
+        })(j);
+      }
+    }
+
+    document.getElementById("prev-btn").addEventListener("click", function() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderSlide(currentIndex);
+      }
+    });
+
+    document.getElementById("next-btn").addEventListener("click", function() {
+      if (currentIndex < slidesData.length - 1) {
+        currentIndex++;
+        renderSlide(currentIndex);
+      }
+    });
+
+    document.getElementById("toggle-notes-btn").addEventListener("click", function() {
+      document.getElementById("speaker-notes-box").classList.toggle("hidden");
+    });
+
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "ArrowRight") {
+        if (currentIndex < slidesData.length - 1) {
+          currentIndex++;
+          renderSlide(currentIndex);
+        }
+      } else if (event.key === "ArrowLeft") {
+        if (currentIndex > 0) {
+          currentIndex--;
+          renderSlide(currentIndex);
+        }
+      }
+    });
+
+    renderSlide(0);
+  </script>
+</body>
+</html>
